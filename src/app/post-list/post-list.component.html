@@ -1,7 +1,16 @@
 <div class="list-post-container">
-    <div *ngFor="let post of posts | async" class="post">
-        <div>{{post.id}}</div>
-        <div>{{post.title}}</div>
-        <div>{{post.body}}</div>
+    <div *ngFor="let post of posts" class="post">
+        <div class="title">{{post.title}}</div>
+        <div class="body">{{post.body}}</div>
+        <button>Go to Author</button>
+        <button (click)="loadComments(post.id)">Load comments</button>
+    
+        <div class="post-comments" *ngIf="post.comments">
+            <div class="comment" *ngFor="let comment of post.comments">
+                <div class="comment-name">{{comment.name}}</div>
+                <div class="comment-email">{{comment.email}}</div>
+                <div>{{comment.body}}</div>
+            </div>
+        </div>
     </div>
 </div>

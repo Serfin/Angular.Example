@@ -5,4 +5,32 @@
 
 .post {
     margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    .title {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .body {
+        margin-bottom: 10px;
+    }
+
+    .post-comments {
+        margin: 10px;
+
+        .comment {
+            margin-bottom: 10px;
+        }
+
+        .comment-name {
+            font-weight: bold;
+        }
+
+        .comment-email {
+            font-style: italic;
+        }
+    }
 }
