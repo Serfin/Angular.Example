@@ -15,11 +15,17 @@
     }
 
     .body {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
+    }
+
+    .post-button {
+        margin-right: 10px;
+        padding: 0.3em;
     }
 
     .post-comments {
         margin: 10px;
+        font-size: small;
 
         .comment {
             margin-bottom: 10px;

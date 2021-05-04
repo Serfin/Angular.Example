@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BackendService } from '../backend.service';
+import { Router } from '@angular/router';
+import { BackendService } from '../common/services/backend.service';
 import { IPost } from './IPost';
 
 @Component({
@@ -10,11 +11,12 @@ import { IPost } from './IPost';
 export class PostListComponent implements OnInit {
   posts?: IPost[];
 
-  constructor(private dataService: BackendService) { }
+  constructor(private dataService: BackendService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.dataService.getPosts()
-      .subscribe(x => this.posts = x );
+      .subscribe(x => this.posts = x);
   }
 
   loadComments(postId: number): void {
@@ -26,5 +28,9 @@ export class PostListComponent implements OnInit {
           post.comments = x;
         }
       });
+  }
+
+  goToAuthor(userId: number): void {
+    this.router.navigate(["/user", userId]);
   }
 }

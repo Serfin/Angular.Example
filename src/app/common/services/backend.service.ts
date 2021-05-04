@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
 import { catchError, shareReplay } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 
-import { IPost } from './post-list/IPost';
-import { IPostComment } from './post-list/IPostComment';
-import { IUser } from './user-list/IUser';
+import { IPost } from 'src/app/post-list/IPost';
+import { IPostComment } from 'src/app/post-list/IPostComment';
+import { IUser } from 'src/app/user-list/IUser';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class BackendService {
   getPosts(): Observable<IPost[]> {
     return this.client.get<IPost[]>(environment.backendUrl + '/posts')
       .pipe(
-        shareReplay(),
+        shareReplay(1),
         catchError(err => {
           console.error(err);
           return EMPTY;

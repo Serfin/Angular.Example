@@ -2,8 +2,10 @@
     <div *ngFor="let post of posts" class="post">
         <div class="title">{{post.title}}</div>
         <div class="body">{{post.body}}</div>
-        <button>Go to Author</button>
-        <button (click)="loadComments(post.id)">Load comments</button>
+        <button (click)="goToAuthor(post.userId)" 
+            class="post-button">Go to Author</button>
+        <button (click)="loadComments(post.id)" 
+            class="post-button">Load comments</button>
     
         <div class="post-comments" *ngIf="post.comments">
             <div class="comment" *ngFor="let comment of post.comments">
