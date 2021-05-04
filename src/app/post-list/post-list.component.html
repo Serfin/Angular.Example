@@ -4,10 +4,12 @@
         <div class="body">{{post.body}}</div>
         <button (click)="goToAuthor(post.userId)" 
             class="post-button">Go to Author</button>
-        <button (click)="loadComments(post.id)" 
+        <button (click)="loadComments(post.id)" [hidden]="postCommentsVisible"
             class="post-button">Load comments</button>
+        <button (click)="hideComments()" [hidden]="!postCommentsVisible"
+            class="post-button">Hide comments</button>
     
-        <div class="post-comments" *ngIf="post.comments">
+        <div class="post-comments" *ngIf="post.comments && postCommentsVisible">
             <div class="comment" *ngFor="let comment of post.comments">
                 <div class="comment-name">{{comment.name}}</div>
                 <div class="comment-email">{{comment.email}}</div>

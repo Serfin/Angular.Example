@@ -10,6 +10,7 @@ import { IPost } from './IPost';
 })
 export class PostListComponent implements OnInit {
   posts?: IPost[];
+  postCommentsVisible: boolean = false;
 
   constructor(private dataService: BackendService,
     private router: Router) { }
@@ -20,14 +21,24 @@ export class PostListComponent implements OnInit {
   }
 
   loadComments(postId: number): void {
+    let post = this.posts?.find(x => x.id == postId);
+    
+    if (post?.comments !== undefined) {
+      this.postCommentsVisible = true;
+      return;
+    }
+
     this.dataService.getPostComments(postId)
       .subscribe(x => {
-        let post = this.posts?.find(x => x.id == postId);
-
         if (post) {
           post.comments = x;
+          this.postCommentsVisible = true;
         }
       });
+  }
+
+  hideComments(): void {
+    this.postCommentsVisible = false;
   }
 
   goToAuthor(userId: number): void {
