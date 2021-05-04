@@ -1,0 +1,25 @@
+.main-container {
+    width: 62.5rem;
+}
+
+.navigation {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+
+    span {
+        margin: 0 0.3em;
+        color: white;
+        background-color: white;
+        border: 1px solid var(--base-color);
+        padding: 0.4em;
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--base-color);
+    }
+}
+
+.inner-container {
+    display: flex;
+}
