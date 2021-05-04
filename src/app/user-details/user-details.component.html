@@ -1,0 +1,17 @@
+<div class="user-details" *ngIf="user">
+    <b>{{user.name}} [{{user.username}}]</b>
+    <p><i>{{user.email}}</i></p>
+
+    <br><p>Address:</p>
+    <div class="user-address">
+        <p>{{user.address.street}} {{user.address.suite}}</p>
+        <p>{{user.address.city}} {{user.address.zipcode}}</p>
+    </div>
+
+    <br><p>Company:</p>
+    <div class="user-company">
+        <p>{{user.company.name}}</p>
+        <p>{{user.company.catchPhrase}}</p>
+        <p>{{user.company.bs}}</p>
+    </div>
+</div>
