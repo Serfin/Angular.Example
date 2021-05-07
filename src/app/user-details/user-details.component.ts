@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BackendService } from '../common/services/backend.service';
-import { IUser } from '../user-list/IUser';
+import { IUser } from '../user-list/user';
 
 @Component({
   selector: 'app-user-details',
@@ -25,7 +25,7 @@ export class UserDetailsComponent implements OnInit {
 
   validateParam(param: string): boolean {
     let parsed = Number(param);
-    
+
     return parsed > 0 && parsed != undefined && parsed != null;
   }
 }
