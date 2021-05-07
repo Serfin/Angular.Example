@@ -1,0 +1,52 @@
+<form (ngSubmit)="onSubmit()" #commentForm="ngForm" class="comment-form">
+    <h3>New comment:</h3>
+    <div class="form-field">
+        <label for="name">Name: </label>
+        <input type="text" id="name" name="name" 
+            [(ngModel)]="comment.name" #name="ngModel"
+            required minlength="5">
+
+        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+            <div *ngIf="name.errors?.required" class="validation-failed">
+                Name is required
+            </div>
+            <div *ngIf="name.errors?.minlength" class="validation-failed">
+                Name must be at least 5 characters long
+            </div>
+        </div>
+    </div>
+    <div class="form-field">
+        <label for="email">Email: </label>
+        <input type="text" id="email" name="email" 
+            [(ngModel)]="comment.email" #email="ngModel"
+            required minlength="5">
+
+        <div *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors?.required" class="validation-failed">
+                Email is required
+            </div>
+            <div *ngIf="email.errors?.minlength" class="validation-failed">
+                Email must be at least 5 characters long
+            </div>
+        </div>
+    </div>
+    <div class="form-field">
+        <label for="body">Body: </label>
+        <input type="text" id="body" name="body" 
+            [(ngModel)]="comment.body" #body="ngModel"
+            required minlength="5">
+
+        <div *ngIf="body.invalid && (body.dirty || body.touched)">
+            <div *ngIf="body.errors?.required" class="validation-failed">
+                Body is required
+            </div>
+            <div *ngIf="body.errors?.minlength" class="validation-failed">
+                Body must be at least 5 characters long
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="!commentForm.form.valid">
+        Add new comment
+    </button>
+</form>

@@ -1,0 +1,22 @@
+.comment-form {
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    padding: 1rem;
+
+    h4 {
+        margin-bottom: 0.3rem;
+    }
+
+    .form-field {
+        margin-bottom: 0.3rem;
+    }
+
+    button {
+        padding: 0.2rem;
+    }
+}
+
+.validation-failed {
+    color: red;
+}

@@ -1,0 +1,12 @@
+<div class="post-comments">
+    <div class="comment" *ngFor="let comment of postComments">
+        <div class="comment-name">{{comment.name}}</div>
+        <div class="comment-email">{{comment.email}}</div>
+        <div>{{comment.body}}</div>
+    </div>
+</div>
+
+<app-add-comment 
+    [postId]="postId"
+    (commentAdded)="commentAdded($event)">
+</app-add-comment>

@@ -4,7 +4,7 @@ import { EMPTY, Observable } from 'rxjs';
 import { catchError, shareReplay } from 'rxjs/operators';
 
 import { IPost } from 'src/app/post-list/post';
-import { IPostComment } from 'src/app/post-list/post-comment';
+import { IPostComment } from 'src/app/post-list/post-comments/post-comment';
 import { IUser } from 'src/app/user-list/user';
 import { environment } from 'src/environments/environment';
 

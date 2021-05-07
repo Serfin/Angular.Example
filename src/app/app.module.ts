@@ -10,17 +10,23 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { HomeComponent } from './home/home.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { AuthorizationGuard } from './common/guards/authorization.guard';
+import { AddCommentComponent } from './post-list/add-comment/add-comment.component';
+import { FormsModule } from '@angular/forms';
+import { PostCommentsComponent } from './post-list/post-comments/post-comments.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostListComponent,
+    AuthenticationComponent,
     UserListComponent,
     UserDetailsComponent,
-    AuthenticationComponent
+    PostListComponent,
+    PostCommentsComponent,
+    AddCommentComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
       { path: "login", component: AuthenticationComponent },

@@ -1,4 +1,4 @@
-import { IPostComment } from "./post-comment";
+import { IPostComment } from "./post-comments/post-comment";
 
 export interface IPost {
     userId: number,
