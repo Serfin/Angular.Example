@@ -3,6 +3,11 @@
         <span><a routerLink="/home" routerLinkActive="active">Home</a></span>
         <span><a routerLink="/users" routerLinkActive="active">Users</a></span>
         <span><a routerLink="/posts" routerLinkActive="active">Posts</a></span>
+
+        <span class="auth-btn" [hidden]="isLoggedIn">
+          <a routerLink="/login" routerLinkActive="active">Login</a>
+        </span>
+        <span (click)="logout()" class="auth-btn" [hidden]="!isLoggedIn">Logout</span>
     </nav>
 
     <div class="inner-container">

@@ -1,0 +1,6 @@
+<div class="login-container">
+  Login: <input #userLogin type="text">
+  Password: <input #userPassword type="password">
+
+  <button (click)="login(userLogin.value, userPassword.value)">Login</button>
+</div>

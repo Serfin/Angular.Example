@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
 import { catchError, shareReplay } from 'rxjs/operators';
 
-import { IPost } from 'src/app/post-list/IPost';
-import { IPostComment } from 'src/app/post-list/IPostComment';
-import { IUser } from 'src/app/user-list/IUser';
+import { IPost } from 'src/app/post-list/post';
+import { IPostComment } from 'src/app/post-list/post-comment';
+import { IUser } from 'src/app/user-list/user';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -28,7 +28,7 @@ export class BackendService {
   getPostById(id: number): Observable<IPost> {
     return this.client.get<IPost>(environment.backendUrl + `/posts/${id}`)
       .pipe(
-        shareReplay(),
+        shareReplay(1),
         catchError(err => {
           console.error(err);
           return EMPTY;
@@ -39,7 +39,7 @@ export class BackendService {
   getPostComments(postId: number): Observable<IPostComment[]> {
     return this.client.get<IPostComment[]>(environment.backendUrl + `/posts/${postId}/comments`)
       .pipe(
-        shareReplay(),
+        shareReplay(1),
         catchError(err => {
           console.error(err);
           return EMPTY;
@@ -67,5 +67,15 @@ export class BackendService {
           return EMPTY;
         })
       );
+  }
+
+  addPost(post: IPost): Observable<IPost> {
+    return this.client.post<IPost>(environment.backendUrl + '/posts', post)
+    .pipe(
+      catchError(err => {
+        console.error(err);
+        return EMPTY;
+      })
+    );
   }
 }

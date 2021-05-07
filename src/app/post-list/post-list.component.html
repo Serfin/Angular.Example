@@ -2,14 +2,14 @@
     <div *ngFor="let post of posts" class="post">
         <div class="title">{{post.title}}</div>
         <div class="body">{{post.body}}</div>
-        <button (click)="goToAuthor(post.userId)" 
+        <button (click)="goToAuthor(post.userId)"
             class="post-button">Go to Author</button>
-        <button (click)="loadComments(post.id)" [hidden]="postCommentsVisible"
+        <button (click)="loadComments(post.id)" [hidden]="post.commentsVisible"
             class="post-button">Load comments</button>
-        <button (click)="hideComments()" [hidden]="!postCommentsVisible"
+        <button (click)="hideComments(post.id)" [hidden]="!post.commentsVisible"
             class="post-button">Hide comments</button>
-    
-        <div class="post-comments" *ngIf="post.comments && postCommentsVisible">
+
+        <div class="post-comments" *ngIf="post.comments && post.commentsVisible">
             <div class="comment" *ngFor="let comment of post.comments">
                 <div class="comment-name">{{comment.name}}</div>
                 <div class="comment-email">{{comment.email}}</div>

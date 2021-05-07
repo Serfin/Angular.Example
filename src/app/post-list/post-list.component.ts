@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackendService } from '../common/services/backend.service';
-import { IPost } from './IPost';
+import { IPost } from './post';
 
 @Component({
   selector: 'app-post-list',
@@ -10,7 +10,6 @@ import { IPost } from './IPost';
 })
 export class PostListComponent implements OnInit {
   posts?: IPost[];
-  postCommentsVisible: boolean = false;
 
   constructor(private dataService: BackendService,
     private router: Router) { }
@@ -22,9 +21,9 @@ export class PostListComponent implements OnInit {
 
   loadComments(postId: number): void {
     let post = this.posts?.find(x => x.id == postId);
-    
+
     if (post?.comments !== undefined) {
-      this.postCommentsVisible = true;
+      post.commentsVisible = true;
       return;
     }
 
@@ -32,13 +31,17 @@ export class PostListComponent implements OnInit {
       .subscribe(x => {
         if (post) {
           post.comments = x;
-          this.postCommentsVisible = true;
         }
       });
   }
 
-  hideComments(): void {
-    this.postCommentsVisible = false;
+  hideComments(postId: number): void {
+    let post = this.posts?.find(x => x.id == postId);
+
+    if (post !== undefined) {
+      post.commentsVisible = false;
+      return;
+    }
   }
 
   goToAuthor(userId: number): void {
