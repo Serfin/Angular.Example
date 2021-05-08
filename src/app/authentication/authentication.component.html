@@ -1,6 +1,31 @@
-<div class="login-container">
-  Login: <input #userLogin type="text">
-  Password: <input #userPassword type="password">
+<form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="login-container">
+  <div>
+    <label for="login">Login: </label>
+    <input type="text" id="login" name="login"
+      [(ngModel)]="authModel.login" #login="ngModel" required>
 
-  <button (click)="login(userLogin.value, userPassword.value)">Login</button>
-</div>
+      <div *ngIf="login.invalid && (login.dirty || login.touched)">
+        <div *ngIf="login.errors?.required" class="validation-failed">
+            Login is required
+        </div>
+      </div>
+  </div>
+  <div>
+    <label for="login">Password: </label>
+    <input type="password" id="password" name="password"
+      [(ngModel)]="authModel.password" #password="ngModel" required>
+      
+    <div *ngIf="password.invalid && (password.dirty || password.touched)">
+      <div *ngIf="password.errors?.required" class="validation-failed">
+        Password is required
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loginResult" class="validation-failed">
+    {{loginErrorMessage}}
+  </div>
+
+  <button type="submit" [disabled]="!loginForm.form.valid">Login</button>
+</form>
+
