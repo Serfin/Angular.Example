@@ -11,13 +11,22 @@ import { IPost } from './post';
 })
 export class PostListComponent implements OnInit {
   posts!: IPost[];
+  paginablePosts!: IPost[];
+
+  page: number = 1;
+  pageSize: number = 3;
+  private maxPage!: number;
 
   constructor(private dataService: BackendService,
     private router: Router) { }
 
   ngOnInit(): void {
     this.dataService.getPosts()
-      .subscribe(x => this.posts = x);
+      .subscribe(x => { 
+          this.posts = x;
+          this.paginablePosts = x.slice(this.page - 1, this.pageSize)
+          this.maxPage = Math.ceil(this.posts.length / this.pageSize);
+        });
   }
 
   loadComments(postId: number): void {
@@ -48,5 +57,21 @@ export class PostListComponent implements OnInit {
 
   goToAuthor(userId: number): void {
     this.router.navigate(["/user", userId]);
+  }
+
+  previousPage(): void {
+    if (this.page === 1) return;
+
+    this.page -= 1;
+    this.paginablePosts = this.posts.slice(
+      (this.page - 1) * this.pageSize, this.page * this.pageSize);
+  }
+
+  nextPage(): void {
+    if (this.page == this.maxPage) return;
+
+    this.page += 1;
+    this.paginablePosts = this.posts.slice(
+      (this.page - 1) * this.pageSize, this.page * this.pageSize);
   }
 }

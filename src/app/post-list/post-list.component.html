@@ -1,5 +1,6 @@
 <div class="list-post-container">
-    <div *ngFor="let post of posts" class="post">
+    <div *ngFor="let post of paginablePosts" class="post">
+        <div>{{post.id}}</div>
         <div class="title">{{post.title}}</div>
         <div class="body">{{post.body}}</div>
         <button (click)="goToAuthor(post.userId)"
@@ -14,5 +15,11 @@
             [postId]="post.id"
             [hidden]="!post.commentsVisible">
         </app-post-comments>
+    </div>
+
+    <div class="pagination">
+        <div (click)="previousPage()" class="btn arrow"><</div>
+        <div>{{page}}</div>
+        <div (click)="nextPage()" class="btn arrow">></div>
     </div>
 </div>
