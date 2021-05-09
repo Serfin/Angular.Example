@@ -12,9 +12,9 @@ import { IPost } from './post';
 export class PostListComponent implements OnInit {
   posts!: IPost[];
   paginablePosts!: IPost[];
-
   page: number = 1;
   pageSize: number = 3;
+
   private maxPage!: number;
 
   constructor(private dataService: BackendService,

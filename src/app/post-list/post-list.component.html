@@ -1,6 +1,5 @@
 <div class="list-post-container">
     <div *ngFor="let post of paginablePosts" class="post">
-        <div>{{post.id}}</div>
         <div class="title">{{post.title}}</div>
         <div class="body">{{post.body}}</div>
         <button (click)="goToAuthor(post.userId)"

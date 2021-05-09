@@ -14,7 +14,7 @@ export class AuthorizationService {
   loginChanged = this._loginChangedSubject.asObservable();
 
   login(authModel: IUser): boolean {
-    if (authModel.login == "test" && authModel.password == "test") {
+    if (authModel.login === "test" && authModel.password === "test") {
       localStorage.setItem(LocalStorageKey.Token, "Y");
       this._loginChangedSubject.next(true);
       return true;
