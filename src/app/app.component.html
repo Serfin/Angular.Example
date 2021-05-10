@@ -1,8 +1,14 @@
 <div class="main-container">
     <nav class="navigation">
-        <span><a routerLink="/home" routerLinkActive="active">Home</a></span>
-        <span [hidden]="!hasAccess('user-list')"><a routerLink="/users" routerLinkActive="active">Users</a></span>
-        <span [hidden]="!hasAccess('post-list')"><a routerLink="/posts" routerLinkActive="active">Posts</a></span>
+        <span>
+          <a routerLink="/home" routerLinkActive="active">Home</a>
+        </span>
+        <span *ngIf="hasAccess('user-list')">
+          <a routerLink="/users" routerLinkActive="active">Users</a>
+        </span>
+        <span *ngIf="hasAccess('post-list')">
+          <a routerLink="/posts" routerLinkActive="active">Posts</a>
+        </span>
 
         <span class="auth-btn" [hidden]="!!userContext">
           <a routerLink="/login" routerLinkActive="active">Login</a>

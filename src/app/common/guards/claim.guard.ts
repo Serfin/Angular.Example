@@ -1,26 +1,21 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
-import { Claim } from '../models/claim';
+import { RestrictedAccess } from '../models/resource-access';
 import { UserContext } from '../models/userContext';
 import { AuthorizationService } from '../services/authorization.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClaimGuard implements CanActivate {
+export class ClaimGuard extends RestrictedAccess implements CanActivate {
   userContext?: UserContext;
 
-  constructor(private authService: AuthorizationService) {
+  constructor(authService: AuthorizationService) {
+    super(authService);
     this.userContext = this.authService.getUserContext();
   }
 
-  canActivate(route: ActivatedRouteSnapshot) {
-    let requiredScope = route.data.scope as string;
-
-    if (this.userContext?.userScopes.includes(Claim.ADMIN)) return true;
-    if (this.userContext?.userScopes.includes(requiredScope)) return true;
-
-    return false;
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+    return this.hasAccess(route.data.scope as string);
   }
-
 }

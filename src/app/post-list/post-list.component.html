@@ -2,14 +2,14 @@
     <div *ngFor="let post of paginablePosts" class="post">
         <div class="title">{{post.title}}</div>
         <div class="body">{{post.body}}</div>
-        <button (click)="goToAuthor(post.userId)"
+        <button [hidden]="!hasAccess('user-details')" (click)="goToAuthor(post.userId)"
             class="post-button">Go to Author</button>
         <button (click)="loadComments(post.id)" [hidden]="post.commentsVisible"
             class="post-button">Load comments</button>
         <button (click)="hideComments(post.id)" [hidden]="!post.commentsVisible"
             class="post-button">Hide comments</button>
 
-        <app-post-comments 
+        <app-post-comments
             [postComments]="post.comments"
             [postId]="post.id"
             [hidden]="!post.commentsVisible">

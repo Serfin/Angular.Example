@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<app-add-comment 
+<app-add-comment *ngIf="hasAccess('add-comment')"
     [postId]="postId"
     (commentAdded)="commentAdded($event)">
 </app-add-comment>

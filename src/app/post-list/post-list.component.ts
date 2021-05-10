@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RestrictedAccess } from '../common/models/resource-access';
+import { AuthorizationService } from '../common/services/authorization.service';
 
 import { BackendService } from '../common/services/backend.service';
 import { IPost } from './post';
@@ -9,7 +11,7 @@ import { IPost } from './post';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss']
 })
-export class PostListComponent implements OnInit {
+export class PostListComponent extends RestrictedAccess implements OnInit {
   posts!: IPost[];
   paginablePosts!: IPost[];
   page: number = 1;
@@ -17,8 +19,11 @@ export class PostListComponent implements OnInit {
 
   private maxPage!: number;
 
-  constructor(private dataService: BackendService,
-    private router: Router) { }
+  constructor(authService: AuthorizationService,
+    private dataService: BackendService,
+    private router: Router) {
+      super(authService);
+    }
 
   ngOnInit(): void {
     this.dataService.getPosts()

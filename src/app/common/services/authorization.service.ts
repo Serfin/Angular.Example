@@ -12,7 +12,7 @@ import { UserContext } from '../models/userContext';
 export class AuthorizationService {
   constructor(private router: Router) {}
 
-  private userContext!: UserContext;
+  private userContext?: UserContext;
 
   private _loginChangedSubject = new Subject<boolean>();
   loginChanged = this._loginChangedSubject.asObservable();
@@ -21,7 +21,7 @@ export class AuthorizationService {
     if (authModel.login === "admin" && authModel.password === "admin") {
       localStorage.setItem(LocalStorageKey.Token, "Y");
       this.userContext = new UserContext(0, [Claim.ADMIN]);
-      this._loginChangedSubject.next();
+      this._loginChangedSubject.next(true);
       return true;
     } else if (authModel.login === "user" && authModel.password === "user") {
       localStorage.setItem(LocalStorageKey.Token, "Y");
@@ -43,6 +43,7 @@ export class AuthorizationService {
 
   logout() {
     localStorage.removeItem(LocalStorageKey.Token);
+    this.userContext = undefined;
     this._loginChangedSubject.next(false);
     this.router.navigateByUrl("home")
   }

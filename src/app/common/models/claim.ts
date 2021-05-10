@@ -9,4 +9,8 @@ export class Claim {
   static Post = class {
     static POST_LIST = 'post-list';
   }
+
+  static Comment = class {
+    static ADD_COMMENT = 'add-comment';
+  }
 }

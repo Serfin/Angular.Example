@@ -9,17 +9,17 @@ import { AuthenticationModel } from './authentication-model';
   styleUrls: ['./authentication.component.scss']
 })
 export class AuthenticationComponent {
-  authModel: AuthenticationModel= {} as AuthenticationModel;
+  authModel: AuthenticationModel = {} as AuthenticationModel;
   loginResult?: boolean;
   loginErrorMessage!: string;
-  
+
   constructor(private authService: AuthorizationService,
     private router: Router) {
   }
 
   onSubmit(): void {
     let loginResult = this.authService
-      .login({ login: this.authModel?.login, 
+      .login({ login: this.authModel?.login,
         password: this.authModel?.password });
 
     if (loginResult) {
