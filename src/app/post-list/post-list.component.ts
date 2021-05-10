@@ -22,7 +22,7 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.getPosts()
-      .subscribe(x => { 
+      .subscribe(x => {
           this.posts = x;
           this.paginablePosts = x.slice(this.page - 1, this.pageSize)
           this.maxPage = Math.ceil(this.posts.length / this.pageSize);
@@ -32,7 +32,7 @@ export class PostListComponent implements OnInit {
   loadComments(postId: number): void {
     let post = this.posts?.find(x => x.id == postId);
 
-    if (post?.comments !== undefined) {
+    if (!!post?.comments) {
       post.commentsVisible = true;
       return;
     }
@@ -49,7 +49,7 @@ export class PostListComponent implements OnInit {
   hideComments(postId: number): void {
     let post = this.posts.find(x => x.id == postId);
 
-    if (post !== undefined) {
+    if (!!post) {
       post.commentsVisible = false;
       return;
     }

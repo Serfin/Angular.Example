@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -6,9 +8,10 @@
 body {
     display: grid;
     place-items: center center;
+    font-family: 'Roboto', sans-serif;
 }
 
-:root 
+:root
 {
     --base-color: #000;
     --base-gradient: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
