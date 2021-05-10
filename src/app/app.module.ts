@@ -14,6 +14,8 @@ import { AddCommentComponent } from './post-list/add-comment/add-comment.compone
 import { FormsModule } from '@angular/forms';
 import { PostCommentsComponent } from './post-list/post-comments/post-comments.component';
 import { AuthorizationInterceptor } from './common/interceptors/authorization.interceptor';
+import { ClaimGuard } from './common/guards/claim.guard';
+import { Claim } from './common/models/claim';
 
 @NgModule({
   declarations: [
@@ -30,13 +32,41 @@ import { AuthorizationInterceptor } from './common/interceptors/authorization.in
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: "login", component: AuthenticationComponent },
-      { path: "home", component: HomeComponent },
-      { path: "posts", component: PostListComponent, canActivate: [AuthorizationGuard] },
-      { path: "users", component: UserListComponent, canActivate: [AuthorizationGuard] },
-      { path: "user/:id", component: UserDetailsComponent, canActivate: [AuthorizationGuard] },
-      { path: "**", redirectTo: "/home", pathMatch: "full" },
-      { path: "", redirectTo: "/home", pathMatch: "full" }
+      {
+        path: "login",
+        component: AuthenticationComponent
+      },
+      {
+        path: "home",
+        component: HomeComponent
+      },
+      { path: "posts",
+        component: PostListComponent,
+        canActivate: [AuthorizationGuard, ClaimGuard],
+        data: { scope: Claim.Post.POST_LIST }
+      },
+      {
+        path: "users",
+        component: UserListComponent,
+        canActivate: [AuthorizationGuard, ClaimGuard],
+        data: { scope: Claim.User.USER_LIST }
+      },
+      {
+        path: "user/:id",
+        component: UserDetailsComponent,
+        canActivate: [AuthorizationGuard, ClaimGuard],
+        data: { scope: Claim.User.USER_DETAILS }
+      },
+      {
+        path: "**",
+        redirectTo: "/home",
+        pathMatch: "full"
+      },
+      {
+        path: "",
+        redirectTo: "/home",
+        pathMatch: "full"
+      }
     ]),
   ],
   providers: [

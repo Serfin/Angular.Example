@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Claim } from './common/models/claim';
+import { UserContext } from './common/models/userContext';
 import { AuthorizationService } from './common/services/authorization.service';
 
 @Component({
@@ -7,16 +9,23 @@ import { AuthorizationService } from './common/services/authorization.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  isLoggedIn: boolean = false;
+  userContext?: UserContext;
 
   constructor(private authService: AuthorizationService) {
-    this.authService.loginChanged.subscribe(isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
-    })
+    this.authService.loginChanged.subscribe(() => {
+      this.userContext = this.authService.getUserContext();
+    });
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isAuthenticated();
+    this.userContext = this.authService.getUserContext();
+  }
+
+  hasAccess(requiredScope: string): boolean {
+    if (!this.userContext || !this.userContext.userScopes) return false;
+
+    return this.userContext.userScopes.includes(requiredScope)
+      || this.userContext.userScopes.includes(Claim.ADMIN);
   }
 
   logout(): void {
