@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -13,6 +13,7 @@ import { AuthorizationGuard } from './common/guards/authorization.guard';
 import { AddCommentComponent } from './post-list/add-comment/add-comment.component';
 import { FormsModule } from '@angular/forms';
 import { PostCommentsComponent } from './post-list/post-comments/post-comments.component';
+import { AuthorizationInterceptor } from './common/interceptors/authorization.interceptor';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,9 @@ import { PostCommentsComponent } from './post-list/post-comments/post-comments.c
       { path: "**", redirectTo: "/home", pathMatch: "full" },
       { path: "", redirectTo: "/home", pathMatch: "full" }
     ]),
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
